@@ -1,5 +1,3 @@
-sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+This repository contains the manifest files (.mpp.yml) in order to be cloned as locals for being used in the Automotive Image Builder tool by SIG.
 
-sudo dnf install -y docker-ce docker-ce-cli containerd.io
-
-sudo systemctl enable --now docker
+For Context on how does the composer works, please visit the site https://sig.centos.org/automotive/
