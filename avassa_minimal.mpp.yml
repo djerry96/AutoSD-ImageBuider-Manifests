@@ -33,6 +33,15 @@ pipelines:
             - [jq]
             - [docker]
             - [dnf]
+            - [chrony]
+            - [less]
+            - [vim]
+            - [hostname]
+            - [net-tools]
+            - [openssh-server]
+            - [iputils]
+            - [iproute]
+            - [podman]
           excludes:
           - dracut-config-rescue
   - type: org.osbuild.groups
