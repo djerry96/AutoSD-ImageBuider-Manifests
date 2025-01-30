@@ -31,6 +31,7 @@ pipelines:
             - mpp-eval: image_rpms
             - mpp-eval: extra_rpms
             - [jq]
+            - [docker]
           excludes:
           - dracut-config-rescue
   - type: org.osbuild.groups
