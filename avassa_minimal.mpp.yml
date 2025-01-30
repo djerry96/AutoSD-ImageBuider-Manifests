@@ -1,7 +1,6 @@
 version: '2'
 mpp-vars:
   name: minimal
-  arch: aarch64
 pipelines:
 - name: rootfs
   build: name:build
@@ -18,7 +17,7 @@ pipelines:
         type: org.osbuild.files
         origin: org.osbuild.source
         mpp-depsolve:
-          architecture: aarch64
+          architecture: $arch
           ignore-weak-deps: true
           module-platform-id: $distro_module_id
           baseurl: $distro_baseurl_repo
