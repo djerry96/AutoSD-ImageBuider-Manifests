@@ -1,0 +1,41 @@
+name: Build AutoSD Base Image
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-autosd-image:
+    name: Build Auto Stream Distribution Base Image
+    runs-on: ubuntu-22.04-arm # ubuntu-latest  Use GitHub-hosted runner
+    # container:
+      # image: ubuntu-22.04-arm  # Use an arm64 container
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install OSBuild prerequisites
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo apt-get install -y python3-pip qemu-utils jq
+        sudo apt-get install podman
+        
+    - name: Clone CentOS AutoSD Repository
+      run: |
+        git clone --recursive https://gitlab.com/CentOS/automotive/sample-images.git
+        curl -O "https://gitlab.com/CentOS/automotive/sample-images/-/raw/main/auto-image-builder.sh?ref_type=heads"
+        cd sample-images
+        sudo bash auto-image-builder.sh build --distro autosd9 --mode image --target qemu --export image images/simple-developer.aib.yml hosted-test-minimal-image.img
+
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: autosd-base-image
+        path: sample-images/*.img
